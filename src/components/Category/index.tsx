@@ -9,11 +9,12 @@ import style from './style';
 type Props = RectButtonProps & {
     title: string;
     icon: React.FC<SvgProps>;
+    hasChackbox?: boolean;
     checked?: boolean;
 }
 
-const Category = ({title, icon: Icon, checked = false, ...rest} : Props) => {
-    const { secondary50, secondary70 } = theme.colors;
+const Category = ({title, icon: Icon, checked = false, hasChackbox = false, ...rest} : Props) => {
+    const { secondary40, secondary50, secondary70, secondary85 } = theme.colors;
 
     return (
         <RectButton {...rest}>
@@ -21,11 +22,17 @@ const Category = ({title, icon: Icon, checked = false, ...rest} : Props) => {
                 style={style.container}
                 colors={[secondary50, secondary70]}
             >
-                <View style={[style.content, { opacity: checked ? 1 : 0.4 }]}>
-                    <View 
-                    style={checked ? style.checked : style.check}
-                    />
-                    
+                <LinearGradient 
+                    style={[style.content, { opacity: checked ? 1 : 0.5 }]}
+                    colors={[ checked ? secondary85 : secondary50, secondary40 ]}
+                >
+                    {   
+                        hasChackbox &&
+                        <View 
+                            style={checked ? style.checked : style.check}
+                        />
+                    }
+
                     <Icon
                         width={48}
                         height={48}
@@ -34,7 +41,7 @@ const Category = ({title, icon: Icon, checked = false, ...rest} : Props) => {
                     <Text style={style.title}>
                         {title}
                     </Text>
-                </View>
+                </LinearGradient>
             </LinearGradient>
         </RectButton>
     );
