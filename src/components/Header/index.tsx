@@ -40,7 +40,7 @@ const Header = ({ title, action }: Props) => {
 
             {
                 action &&
-                <View style={style.container}>
+                <View>
                     { action }
                 </View>
             }
