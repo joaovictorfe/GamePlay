@@ -7,7 +7,7 @@ type Props = {
     subtitle: string;
 }
 
-const fcListHeader = ({ title, subtitle }: Props) => {
+const ListHeader = ({ title, subtitle }: Props) => {
     return (
         <View style={style.container}>
             <Text style={style.title}>
@@ -20,4 +20,4 @@ const fcListHeader = ({ title, subtitle }: Props) => {
         </View>
     );
 }
-export default fcListHeader;
+export default ListHeader;

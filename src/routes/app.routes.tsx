@@ -22,10 +22,6 @@ const AuthRoutes = () => {
             }}
         >
             <Screen
-                name="SignIn"
-                component={SignIn}
-            />
-            <Screen
                 name="Home"
                 component={Home}
             />

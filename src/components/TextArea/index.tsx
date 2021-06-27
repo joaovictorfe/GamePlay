@@ -6,6 +6,7 @@ const TextArea = ({...rest}: TextInputProps) => {
     return (
         <TextInput
             style={style.container}
+            numberOfLines={5}
             {...rest}
         />
     );

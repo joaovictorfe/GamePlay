@@ -9,13 +9,8 @@ import { categories } from '../../utils/categories';
 import PlayerSvg from '../../assets/player.svg';
 import { theme } from '../../global/styles/theme';
 import CalendarSvg from '../../assets/calendar.svg';
-
-export type GuildProps = {
-    id: string;
-    name: string;
-    icon: null;
-    ownoer: boolean;
-}
+import { GuildProps } from '../Guild';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export type AppointmentProps = {
     id: string;
@@ -31,13 +26,18 @@ type Props = RectButtonProps & {
 
 const Appointment = ({ data, ...rest}: Props) => {
     const [category] = categories.filter(item => item.id === data.category);
-    const { ownoer } = data.guild;
-    const { primary, on } = theme.colors;
+    const { owner } = data.guild;
+    const { primary, on, secondary50, secondary70 } = theme.colors;
 
     return (
         <RectButton {...rest}>
             <View style={style.container}>
-                <GuildIcon />
+                <LinearGradient
+                    style={style.guildIconContainer}
+                    colors={[secondary50, secondary70]}
+                >
+                    <GuildIcon guildId={data.guild.id} iconId={data.guild.icon} />
+                </LinearGradient>
 
                 <View style={style.content}>
                     <View style={style.header}>
@@ -60,13 +60,13 @@ const Appointment = ({ data, ...rest}: Props) => {
                         </View>
 
                         <View style={style.playersInfo}>
-                            <PlayerSvg fill={ ownoer ? primary : on } />
+                            <PlayerSvg fill={ owner ? primary : on } />
 
                             <Text style={[
                                 style.player,
-                                { color: ownoer ? primary : on }
+                                { color: owner ? primary : on }
                             ]}>
-                                { ownoer ? 'Anfitrião' : 'Visitante' }
+                                { owner ? 'Anfitrião' : 'Visitante' }
                             </Text>
                         </View>
                     </View>
